@@ -1,158 +1,211 @@
-/* global document, module */
-var pokemonList = [
-  { img: "assets/images/pikachu01.png", name: "pikachu" },
-  { img: "assets/images/charmander02.png", name: "charmander" },
-  { img: "assets/images/bulbasaur03.png", name: "bulbasaur" },
-  { img: "assets/images/squirtle04.png", name: "squirtle" },
-  { img: "assets/images/jigglypuff05.png", name: "jigglypuff" },
-  { img: "assets/images/meowth06.png", name: "meowth" },
-  { img: "assets/images/psyduck07.png", name: "psyduck" },
-  { img: "assets/images/snorlax08.png", name: "snorlax" },
-  { img: "assets/images/eevee09.png", name: "eevee" },
-  { img: "assets/images/vulpix10.png", name: "vulpix" },
-  { img: "assets/images/growlithe11.png", name: "growlithe" },
-  { img: "assets/images/machop12.png", name: "machop" },
-  { img: "assets/images/geodude13.png", name: "geodude" },
-  { img: "assets/images/onix14.png", name: "onix" },
-  { img: "assets/images/magnemite15.png", name: "magnemite" },
-  { img: "assets/images/gastly16.png", name: "gastly" },
-  { img: "assets/images/haunter17.png", name: "haunter" },
-  { img: "assets/images/alakazam18.png", name: "alakazam" },
-  { img: "assets/images/magikarp19.png", name: "magikarp" },
-  { img: "assets/images/gengar20.png", name: "gengar" }
+/*global document, module, Math, setTimeout */
+/*jslint browser: true, for: true */
+
+const pokemonList = [
+    {img: "assets/images/pikachu01.png", name: "pikachu"},
+    {img: "assets/images/charmander02.png", name: "charmander"},
+    {img: "assets/images/bulbasaur03.png", name: "bulbasaur"},
+    {img: "assets/images/squirtle04.png", name: "squirtle"},
+    {img: "assets/images/jigglypuff05.png", name: "jigglypuff"},
+    {img: "assets/images/meowth06.png", name: "meowth"},
+    {img: "assets/images/psyduck07.png", name: "psyduck"},
+    {img: "assets/images/snorlax08.png", name: "snorlax"},
+    {img: "assets/images/eevee09.png", name: "eevee"},
+    {img: "assets/images/vulpix10.png", name: "vulpix"},
+    {img: "assets/images/growlithe11.png", name: "growlithe"},
+    {img: "assets/images/machop12.png", name: "machop"},
+    {img: "assets/images/geodude13.png", name: "geodude"},
+    {img: "assets/images/onix14.png", name: "onix"},
+    {img: "assets/images/magnemite15.png", name: "magnemite"},
+    {img: "assets/images/gastly16.png", name: "gastly"},
+    {img: "assets/images/haunter17.png", name: "haunter"},
+    {img: "assets/images/alakazam18.png", name: "alakazam"},
+    {img: "assets/images/magikarp19.png", name: "magikarp"},
+    {img: "assets/images/gengar20.png", name: "gengar"}
 ];
 
-// Pure Logic Functions
 function isCorrectGuess(userGuess, pokemonId, list) {
-  return userGuess.trim().toLowerCase() === list[pokemonId].name;
+    "use strict";
+    return userGuess.trim().toLowerCase() === list[pokemonId].name;
 }
 
 function updateScore(isCorrect, currentScore) {
-  return isCorrect ? currentScore + 1 : currentScore;
+    "use strict";
+    return (
+        isCorrect
+        ? currentScore + 1
+        : currentScore
+    );
 }
 
 function nextPokemonId(currentId, listLength) {
-  return (currentId + 1) % listLength;
+    "use strict";
+    return (currentId + 1) % listLength;
 }
 
 function shuffleArray(array) {
-  var copy = array.slice();
-  var i, j, temp;
-  for (i = copy.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    temp = copy[i];
-    copy[i] = copy[j];
-    copy[j] = temp;
-  }
-  return copy;
+    "use strict";
+    const copy = array.slice();
+    let i;
+    let j;
+    let temp;
+
+    for (i = copy.length - 1; i > 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = temp;
+    }
+    return copy;
 }
 
-// DOM Game
-if (typeof document === "object") {
-  document.addEventListener("DOMContentLoaded", function() {
-    var pokemonImage = document.getElementById("pokemonImage");
-    var guessInput = document.getElementById("guessInput");
-    var resultText = document.getElementById("resultText");
-    var checkGuessButton = document.getElementById("checkGuessButton");
-    var nextPokemonButton = document.getElementById("nextPokemonButton");
+function initializeGame() {
+    "use strict";
 
-    var shuffledPokemonList = shuffleArray(pokemonList);
-    var currentPokemonId = 0;
-    var score = 0;
-    var highScore = 0;
-    var wrongGuesses = 0;
+    let pokemonImage;
+    let guessInput;
+    let resultText;
+    let checkGuessButton;
+    let nextPokemonButton;
+    let shuffledPokemonList;
+    let currentPokemonId;
+    let score;
+    let highScore;
+    let wrongGuesses;
+
+    if (typeof document !== "object") {
+        return;
+    }
+
+    pokemonImage = document.getElementById("pokemonImage");
+    guessInput = document.getElementById("guessInput");
+    resultText = document.getElementById("resultText");
+    checkGuessButton = document.getElementById("checkGuessButton");
+    nextPokemonButton = document.getElementById("nextPokemonButton");
+    shuffledPokemonList = shuffleArray(pokemonList);
+    currentPokemonId = 0;
+    score = 0;
+    highScore = 0;
+    wrongGuesses = 0;
 
     function runGame() {
-      pokemonImage.src = shuffledPokemonList[currentPokemonId].img;
-      resultText.textContent = "➡️ Enter your guess!";
-      guessInput.value = "";
-      guessInput.disabled = false;
-      guessInput.focus();
+        pokemonImage.src = shuffledPokemonList[currentPokemonId].img;
+        resultText.textContent = "➡️ Enter your guess!";
+        guessInput.value = "";
+        guessInput.disabled = false;
+        guessInput.focus();
     }
 
     function showEndOverlay() {
-      var overlay = document.createElement("div");
-      overlay.className = "results-overlay";
-      overlay.innerHTML = `
-        <div class="results-content text-center bg-light p-4 rounded shadow">
-          <h2>🏁 Round Finished!</h2>
-          <p>Final Score: ${score}</p>
-          <p>Wrong Guesses: ${wrongGuesses}</p>
-          <p>High Score: ${highScore}</p>
-          <button id="restartButton" class="btn btn-success mt-3">Restart Game</button>
-        </div>`;
-      document.body.appendChild(overlay);
+        const overlay = document.createElement("div");
 
-      document.getElementById("restartButton").addEventListener("click", function() {
-        document.body.removeChild(overlay);
-        restartGame();
-      });
+        overlay.className = "results-overlay";
+        overlay.innerHTML = `
+            <div class="results-content text-center
+                bg-light p-4 rounded shadow">
+                <h2>🏁 Round Finished!</h2>
+                <p>Final Score: ${score}</p>
+                <p>Wrong Guesses: ${wrongGuesses}</p>
+                <p>High Score: ${highScore}</p>
+                <button id="restartButton"
+                    class="btn btn-success mt-3">
+                    Restart Game
+                </button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const restartButton = document.getElementById("restartButton");
+        restartButton.addEventListener("click", function () {
+            document.body.removeChild(overlay);
+            restartGame();
+        });
     }
 
     function handleCheckGuess() {
-      var userGuess = guessInput.value.trim();
-      if (!userGuess) {
-        resultText.textContent = "⚠️ Please enter a guess!";
-        return;
-      }
+        const userGuess = guessInput.value.trim();
 
-      var correct = isCorrectGuess(userGuess, currentPokemonId, shuffledPokemonList);
-      if (correct) {
-        score = updateScore(true, score);
-        if (score > highScore) highScore = score;
-        resultText.textContent = `🎉 Correct! It's ${shuffledPokemonList[currentPokemonId].name}! Score: ${score}`;
-      } else {
-        wrongGuesses++;
-        resultText.textContent = "❌ Wrong guess!";
-      }
-
-      setTimeout(function() {
-        if (currentPokemonId === shuffledPokemonList.length - 1) {
-          showEndOverlay();
-        } else {
-          currentPokemonId = nextPokemonId(currentPokemonId, shuffledPokemonList.length);
-          runGame();
+        if (!userGuess) {
+            resultText.textContent = "⚠️ Please enter a guess!";
+            return;
         }
-      }, 800);
+
+        const correct = isCorrectGuess(
+            userGuess,
+            currentPokemonId,
+            shuffledPokemonList
+        );
+
+        if (correct) {
+            score = updateScore(true, score);
+            if (score > highScore) {
+                highScore = score;
+            }
+            resultText.textContent = `🎉 Correct! It's
+${shuffledPokemonList[currentPokemonId].name}!
+Score: ${score}`;
+        } else {
+            wrongGuesses += 1;
+            resultText.textContent = "❌ Wrong guess!";
+        }
+
+        setTimeout(function () {
+            if (currentPokemonId === shuffledPokemonList.length - 1) {
+                showEndOverlay();
+            } else {
+                currentPokemonId = nextPokemonId(
+                    currentPokemonId,
+                    shuffledPokemonList.length
+                );
+                runGame();
+            }
+        }, 800);
     }
 
     function handleSkip() {
-      wrongGuesses++;
-      if (currentPokemonId === shuffledPokemonList.length - 1) {
-        showEndOverlay();
-      } else {
-        currentPokemonId = nextPokemonId(currentPokemonId, shuffledPokemonList.length);
-        runGame();
-      }
+        wrongGuesses += 1;
+        if (currentPokemonId === shuffledPokemonList.length - 1) {
+            showEndOverlay();
+        } else {
+            currentPokemonId = nextPokemonId(
+                currentPokemonId,
+                shuffledPokemonList.length
+            );
+            runGame();
+        }
     }
 
     function restartGame() {
-      shuffledPokemonList = shuffleArray(pokemonList);
-      currentPokemonId = 0;
-      score = 0;
-      wrongGuesses = 0;
-      runGame();
+        shuffledPokemonList = shuffleArray(pokemonList);
+        currentPokemonId = 0;
+        score = 0;
+        wrongGuesses = 0;
+        runGame();
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            handleCheckGuess();
+        }
     }
 
     checkGuessButton.addEventListener("click", handleCheckGuess);
     nextPokemonButton.addEventListener("click", handleSkip);
-    guessInput.addEventListener("keypress", function(event) {
-      if (event.key === "Enter") {
-        handleCheckGuess();
-      }
-    });
+    guessInput.addEventListener("keypress", handleKeyPress);
 
     runGame();
-  });
 }
 
-// Exports for testing
+if (typeof document === "object") {
+    document.addEventListener("DOMContentLoaded", initializeGame);
+}
+
 if (typeof module === "object" && module.exports) {
-  module.exports = {
-    pokemonList,
-    isCorrectGuess,
-    updateScore,
-    nextPokemonId,
-    shuffleArray
-  };
+    module.exports = {
+        isCorrectGuess,
+        nextPokemonId,
+        pokemonList,
+        shuffleArray,
+        updateScore
+    };
 }
