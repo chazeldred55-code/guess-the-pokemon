@@ -142,6 +142,7 @@ phone pokemon game
 
 ## Automatic Testing
 Jest
+<img width="902" height="352" alt="image" src="https://github.com/user-attachments/assets/b774c99d-c6ee-42b4-8176-37cbd2cf83ef" />
 
 
 ## Principles Testing
