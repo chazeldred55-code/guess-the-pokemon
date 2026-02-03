@@ -17,6 +17,7 @@
 14. [Bugs and Fixes Log](#bugs-and-fixes-log)  
 15. [Deployment](#deployment)  
 16. [Testing Principles](#testing-principles)
+17. [Future_Enhancements](#future-enhancements)
 
 ---
 
@@ -60,6 +61,11 @@ To provide a lightweight, replayable Pokémon guessing game that delivers immedi
 - Shows state management, DOM manipulation, defensive input handling, and event-driven logic.
 - Includes both manual and automated testing with documented results.
 - Fully deployed and accessible via GitHub Pages.
+
+**Value to Site Owner:**
+- Demonstrates clean separation of logic and presentation.
+- Shows testing discipline through Jest and Lighthouse.
+- Acts as a reusable template for future browser-based games.
 
 ---
 
@@ -126,8 +132,8 @@ Wireframes were created for desktop, tablet, and mobile screen sizes for both th
 - Clear text contrast and readable font sizes.
 - Keyboard support (Enter key submits guesses).
 - Responsive layout supports mobile, tablet, and desktop devices.
-
----
+### Design choice
+The restrained colour palette was deliberately chosen over a more vibrant theme to avoid distracting from the Pokémon silhouettes, which are the core gameplay element. High-contrast colours were prioritised to ensure feedback messages remain readable across devices and lighting conditions.
 
 ## Features
 - Randomised Pokémon order each playthrough.
@@ -299,9 +305,16 @@ Testing was conducted using both **manual** and **automated** approaches.
 - **Automated testing** ensures core logic remains reliable.
 
 Testing follows the **RITE** principles:
-- **Readable**
-- **Isolated**
-- **Thorough**
-- **Explicit**
+Readable – Test names clearly describe expected behaviour.
+Isolated – Core logic is tested independently of the DOM.
+Thorough – Positive and negative cases are covered.
+Explicit – Expected outcomes are clearly asserted.
+
+## Future Enhancements
+- Multiple-choice mode to reduce input friction.
+- Larger Pokémon dataset loaded dynamically.
+- Adaptive difficulty (start with common Pokémon, progress to obscure).
+- Optional audio or animation feedback.
+
 
 ---
