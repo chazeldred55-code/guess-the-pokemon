@@ -219,7 +219,8 @@ Automated unit tests were written using **Jest** to validate core game logic suc
 ---
 
 ## Usability Testing (Lighthouse)
-Lighthouse audits were performed using Chrome DevTools on all pages.
+Lighthouse audits were performed using Chrome DevTools on all pages -
+
 
 **Pages tested:**
 - Home page
@@ -232,9 +233,22 @@ Lighthouse audits were performed using Chrome DevTools on all pages.
 - Best Practices
 - SEO
 
-> *(Lighthouse screenshots to be added here.)*
+> ### Mobile
+- Home Page
+<img width="677" height="558" alt="image" src="https://github.com/user-attachments/assets/d6e3d08d-5704-4d59-937a-f3e35ea2a149" />
+- Game Page
+  <img width="667" height="542" alt="image" src="https://github.com/user-attachments/assets/dc929752-4a88-4fe2-92f6-56172d1bc088" />
+- 404 page
+  <img width="673" height="542" alt="image" src="https://github.com/user-attachments/assets/fe91a614-d156-42f4-80cc-903f68e0df89" />
 
----
+### Laptop
+- Home page
+  <img width="682" height="585" alt="image" src="https://github.com/user-attachments/assets/67318486-a339-40e2-8f9b-b56154583b23" />
+- Game Page
+  <img width="686" height="552" alt="image" src="https://github.com/user-attachments/assets/9f9d8512-5637-40b7-9f57-1fe93ac8ea12" />
+-404 page
+  <img width="683" height="581" alt="image" src="https://github.com/user-attachments/assets/7b728528-ae1e-4ef9-8351-ece5891a7df8" />
+
 
 ## Bugs and Fixes Log
 
