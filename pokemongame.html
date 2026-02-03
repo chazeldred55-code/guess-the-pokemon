@@ -6,69 +6,177 @@
   <title>Pokémon Quiz | Game</title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  >
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+
+<body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <i class="fa-solid fa-dragon"></i> Pokémon Quiz
+        <i class="fa-solid fa-dragon" aria-hidden="true"></i>
+        Pokémon Quiz
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="pokemongame.html">Play Game</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="pokemongame.html">
+              Play Game
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Main Game Area -->
-  <main class="flex-grow-1 py-5 mt-4">
+  <main class="flex-grow-1 py-5 mt-5">
     <div class="container text-center">
-      <h1 class="mb-4 fw-bold">Guess the Pokémon!</h1>
+      <h1 class="mb-3 fw-bold">Guess the Pokémon!</h1>
+
+      <p class="text-muted mb-4">
+        Choose a mode: type your answer, or pick from multiple choice.
+      </p>
+
+      <!-- Mode Toggle -->
+      <div class="d-flex justify-content-center mb-4">
+        <div class="btn-group" role="group" aria-label="Game mode toggle">
+          <input type="radio" class="btn-check" name="mode" id="modeText" checked>
+          <label class="btn btn-outline-primary" for="modeText">Text Input</label>
+
+          <input type="radio" class="btn-check" name="mode" id="modeChoice">
+          <label class="btn btn-outline-primary" for="modeChoice">Multiple Choice</label>
+        </div>
+      </div>
 
       <!-- Pokémon Image -->
       <div class="mb-4">
-        <img id="pokemonImage" src="assets/images/pikachu01.png" alt="Guess the Pokémon" 
-             class="img-fluid shadow-lg rounded" style="max-width: 300px;">
+        <img
+          id="pokemonImage"
+          src="assets/images/pikachu01.png"
+          alt="Pokémon silhouette to guess"
+          class="img-fluid shadow-lg rounded"
+          style="max-width: 300px;"
+        >
       </div>
 
       <!-- Result Message -->
-      <p id="resultText" class="lead fw-bold">➡️ Enter your guess!</p>
+      <p id="resultText" class="lead fw-bold" aria-live="polite">
+        ➡️ Enter your guess!
+      </p>
 
-      <!-- Input & Buttons -->
-      <div class="mb-3">
-        <input type="text" id="guessInput" class="form-control text-center mb-3" placeholder="Enter your guess">
-        <div>
-          <button id="checkGuessButton" class="btn btn-success me-2">Submit</button>
-          <button id="nextPokemonButton" class="btn btn-danger">Skip</button>
+      <!-- Text Input Mode -->
+      <section id="textModePanel" class="mb-4" aria-label="Text input guessing mode">
+        <div class="mx-auto" style="max-width: 420px;">
+          <label for="guessInput" class="form-label visually-hidden">
+            Enter your Pokémon guess
+          </label>
+
+          <input
+            type="text"
+            id="guessInput"
+            class="form-control text-center mb-3"
+            placeholder="Enter your guess"
+            autocomplete="off"
+          >
+
+          <div class="d-flex justify-content-center gap-2">
+            <button id="checkGuessButton" type="button" class="btn btn-success">
+              Submit
+            </button>
+            <button id="nextPokemonButton" type="button" class="btn btn-danger">
+              Skip
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Multiple Choice Mode -->
+      <section
+        id="choiceModePanel"
+        class="mb-4 d-none"
+        aria-label="Multiple choice guessing mode"
+      >
+        <div class="mx-auto" style="max-width: 520px;">
+          <div class="row g-2">
+            <div class="col-12 col-sm-6">
+              <button type="button" class="btn btn-outline-secondary w-100 choice-btn" data-choice="0">
+                Option A
+              </button>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button type="button" class="btn btn-outline-secondary w-100 choice-btn" data-choice="1">
+                Option B
+              </button>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button type="button" class="btn btn-outline-secondary w-100 choice-btn" data-choice="2">
+                Option C
+              </button>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button type="button" class="btn btn-outline-secondary w-100 choice-btn" data-choice="3">
+                Option D
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center gap-2 mt-3">
+            <button id="choiceSkipButton" type="button" class="btn btn-danger">
+              Skip
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="bg-light py-3 text-center small text-muted mt-auto">
-    &copy; 2025 Pokémon Quiz Game. All rights reserved.
+    &copy; <span id="year"></span> Pokémon Quiz Game. All rights reserved.
   </footer>
 
   <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+  ></script>
 
   <!-- Game Logic -->
   <script src="js/game.js"></script>
+
+  <!-- Dynamic Year -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>

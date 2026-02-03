@@ -1,11 +1,6 @@
 /*global document, module, Math, setTimeout */
 /*jslint browser: true, for: true */
 
-/*
-    Game data:
-    Each Pokémon entry maps an image (silhouette) to its expected name.
-    Keeping this local makes the game lightweight and reliable for a static site.
-*/
 const pokemonList = [
     {img: "assets/images/pikachu01.png", name: "pikachu"},
     {img: "assets/images/charmander02.png", name: "charmander"},
@@ -30,9 +25,7 @@ const pokemonList = [
 ];
 
 /*
-    Pure function:
-    Compares the user's guess to the current Pokémon's name.
-    Normalising whitespace + case makes input more forgiving.
+    Checks whether the user's guess matches the current Pokémon name.
 */
 function isCorrectGuess(userGuess, pokemonId, list) {
     "use strict";
@@ -40,9 +33,7 @@ function isCorrectGuess(userGuess, pokemonId, list) {
 }
 
 /*
-    Pure function:
-    Updates the score without mutating external state.
-    This keeps the scoring logic easy to test.
+    Updates score without mutating external state.
 */
 function updateScore(isCorrect, currentScore) {
     "use strict";
@@ -54,8 +45,7 @@ function updateScore(isCorrect, currentScore) {
 }
 
 /*
-    Pure function:
-    Advances to the next index, wrapping back to 0 at the end.
+    Moves to the next Pokémon index, wrapping around at the end.
 */
 function nextPokemonId(currentId, listLength) {
     "use strict";
@@ -63,9 +53,7 @@ function nextPokemonId(currentId, listLength) {
 }
 
 /*
-    Utility:
-    Returns a shuffled *copy* of the provided array (Fisher–Yates).
-    Copying avoids changing the original data set (pokemonList).
+    Returns a shuffled copy of an array (Fisher–Yates).
 */
 function shuffleArray(array) {
     "use strict";
@@ -84,10 +72,36 @@ function shuffleArray(array) {
 }
 
 /*
-    Main initialiser:
-    - Caches DOM references
-    - Creates game state (score, current Pokémon, etc.)
-    - Wires up event handlers for buttons + Enter key
+    DOM helper: try multiple IDs, then fallback to a selector.
+*/
+function getElByIdsOrSelector(idList, selector) {
+    "use strict";
+    let el = null;
+    let i;
+
+    if (typeof document !== "object") {
+        return null;
+    }
+
+    if (idList && idList.length) {
+        for (i = 0; i < idList.length; i += 1) {
+            el = document.getElementById(idList[i]);
+            if (el) {
+                return el;
+            }
+        }
+    }
+
+    if (selector) {
+        return document.querySelector(selector);
+    }
+
+    return null;
+}
+
+/*
+    Main initializer:
+    Caches DOM, sets state, and wires events.
 */
 function initializeGame() {
     "use strict";
@@ -97,29 +111,81 @@ function initializeGame() {
     let resultText;
     let checkGuessButton;
     let nextPokemonButton;
+
+    let scoreOut;
+    let highScoreOut;
+    let wrongOut;
+    let roundOut;
+
     let shuffledPokemonList;
     let currentPokemonId;
     let score;
     let highScore;
     let wrongGuesses;
 
-    /*
-        Guard clause:
-        Allows this file to be required in a test environment (Node)
-        without throwing due to missing DOM APIs.
-    */
     if (typeof document !== "object") {
         return;
     }
 
-    // Cache frequently-used DOM elements to avoid repeated lookups
-    pokemonImage = document.getElementById("pokemonImage");
-    guessInput = document.getElementById("guessInput");
-    resultText = document.getElementById("resultText");
-    checkGuessButton = document.getElementById("checkGuessButton");
-    nextPokemonButton = document.getElementById("nextPokemonButton");
+    pokemonImage = getElByIdsOrSelector(
+        ["pokemonImage", "pokemon-image", "pokeImage", "silhouetteImage"],
+        "[data-role=\"pokemon-image\"]"
+    );
 
-    // Initialise game state
+    guessInput = getElByIdsOrSelector(
+        ["guessInput", "guess-input", "pokemonGuess", "userGuess"],
+        "[data-role=\"guess-input\"]"
+    );
+
+    resultText = getElByIdsOrSelector(
+        ["resultText", "result-text", "feedbackText", "messageText"],
+        "[data-role=\"result-text\"]"
+    );
+
+    checkGuessButton = getElByIdsOrSelector(
+        ["checkGuessButton", "submitGuessButton", "submitButton"],
+        "[data-role=\"submit-guess\"]"
+    );
+
+    nextPokemonButton = getElByIdsOrSelector(
+        ["nextPokemonButton", "nextButton", "skipButton"],
+        "[data-role=\"next-pokemon\"]"
+    );
+
+    scoreOut = getElByIdsOrSelector(
+        ["scoreValue", "score"],
+        "[data-role=\"score\"]"
+    );
+
+    highScoreOut = getElByIdsOrSelector(
+        ["highScoreValue", "highScore"],
+        "[data-role=\"high-score\"]"
+    );
+
+    wrongOut = getElByIdsOrSelector(
+        ["wrongGuessesValue", "wrongGuesses"],
+        "[data-role=\"wrong-guesses\"]"
+    );
+
+    roundOut = getElByIdsOrSelector(
+        ["roundValue", "round"],
+        "[data-role=\"round\"]"
+    );
+
+    if (
+        !pokemonImage ||
+        !guessInput ||
+        !resultText ||
+        !checkGuessButton ||
+        !nextPokemonButton
+    ) {
+        return;
+    }
+
+    if (!resultText.getAttribute("aria-live")) {
+        resultText.setAttribute("aria-live", "polite");
+    }
+
     shuffledPokemonList = shuffleArray(pokemonList);
     currentPokemonId = 0;
     score = 0;
@@ -127,42 +193,69 @@ function initializeGame() {
     wrongGuesses = 0;
 
     /*
-        Displays the current Pokémon silhouette and resets the input UI.
-        This is called at the start and after moving to the next round.
+        Updates score indicators if present in the HTML.
     */
-    function runGame() {
-        pokemonImage.src = shuffledPokemonList[currentPokemonId].img;
-        resultText.textContent = "➡️ Enter your guess!";
-        guessInput.value = "";
-        guessInput.disabled = false;
-        guessInput.focus();
+    function syncStats() {
+        const roundNum = currentPokemonId + 1;
+        const total = shuffledPokemonList.length;
+
+        if (scoreOut) {
+            scoreOut.textContent = String(score);
+        }
+        if (highScoreOut) {
+            highScoreOut.textContent = String(highScore);
+        }
+        if (wrongOut) {
+            wrongOut.textContent = String(wrongGuesses);
+        }
+        if (roundOut) {
+            roundOut.textContent = (
+                String(roundNum) + "/" + String(total)
+            );
+        }
     }
 
     /*
-        End-of-round overlay:
-        Summarises performance and offers a single "Restart" action.
-        This keeps the end-state clear and prevents accidental extra guesses.
+        Loads the current Pokémon and resets input state.
+    */
+    function runGame() {
+        pokemonImage.src = shuffledPokemonList[currentPokemonId].img;
+        pokemonImage.alt = "Pok\u00E9mon silhouette to guess";
+
+        resultText.textContent = "\u27A1\uFE0F Enter your guess!";
+        guessInput.value = "";
+        guessInput.disabled = false;
+        guessInput.focus();
+
+        syncStats();
+    }
+
+    /*
+        Shows end-of-round overlay and restart option.
     */
     function showEndOverlay() {
         const overlay = document.createElement("div");
+        let restartButton;
 
         overlay.className = "results-overlay";
-        overlay.innerHTML = `
-            <div class="results-content text-center
-                bg-light p-4 rounded shadow">
-                <h2>🏁 Round Finished!</h2>
-                <p>Final Score: ${score}</p>
-                <p>Wrong Guesses: ${wrongGuesses}</p>
-                <p>High Score: ${highScore}</p>
-                <button id="restartButton"
-                    class="btn btn-success mt-3">
-                    Restart Game
-                </button>
-            </div>
-        `;
+
+        overlay.innerHTML = (
+            "<div class=\"results-content text-center " +
+            "bg-light p-4 rounded shadow\">" +
+            "<h2>\uD83C\uDFC1 Round Finished!</h2>" +
+            "<p>Final Score: " + score + "</p>" +
+            "<p>Wrong Guesses: " + wrongGuesses + "</p>" +
+            "<p>High Score: " + highScore + "</p>" +
+            "<button id=\"restartButton\" " +
+            "class=\"btn btn-success mt-3\" type=\"button\">" +
+            "Restart Game" +
+            "</button>" +
+            "</div>"
+        );
+
         document.body.appendChild(overlay);
 
-        const restartButton = document.getElementById("restartButton");
+        restartButton = document.getElementById("restartButton");
         restartButton.addEventListener("click", function () {
             document.body.removeChild(overlay);
             restartGame();
@@ -170,73 +263,70 @@ function initializeGame() {
     }
 
     /*
-        Validates the user's input, updates score stats, and advances.
-        A short delay is used so users can read the feedback message.
+        Move to next Pokémon or end the round.
     */
-    function handleCheckGuess() {
-        const userGuess = guessInput.value.trim();
-
-        // Prevent empty submissions to improve usability
-        if (!userGuess) {
-            resultText.textContent = "⚠️ Please enter a guess!";
+    function goNextOrEnd() {
+        if (currentPokemonId === shuffledPokemonList.length - 1) {
+            showEndOverlay();
             return;
         }
 
+        currentPokemonId = nextPokemonId(
+            currentPokemonId,
+            shuffledPokemonList.length
+        );
+        runGame();
+    }
+
+    /*
+        Handles user guess submission.
+    */
+    function handleCheckGuess() {
+        const userGuess = guessInput.value.trim();
         const correct = isCorrectGuess(
             userGuess,
             currentPokemonId,
             shuffledPokemonList
         );
 
+        if (!userGuess) {
+            resultText.textContent = "\u26A0\uFE0F Please enter a guess!";
+            return;
+        }
+
         if (correct) {
             score = updateScore(true, score);
             if (score > highScore) {
                 highScore = score;
             }
-            resultText.textContent = `🎉 Correct! It's
-${shuffledPokemonList[currentPokemonId].name}!
-Score: ${score}`;
+
+            resultText.textContent = (
+                "\uD83C\uDF89 Correct! It's " +
+                shuffledPokemonList[currentPokemonId].name +
+                "!"
+            );
         } else {
             wrongGuesses += 1;
-            resultText.textContent = "❌ Wrong guess!";
+            resultText.textContent = "\u274C Wrong guess!";
         }
 
-        setTimeout(function () {
-            // If this was the last Pokémon in the shuffled list, end the round
-            if (currentPokemonId === shuffledPokemonList.length - 1) {
-                showEndOverlay();
-            } else {
-                currentPokemonId = nextPokemonId(
-                    currentPokemonId,
-                    shuffledPokemonList.length
-                );
-                runGame();
-            }
-        }, 800);
+        syncStats();
+        setTimeout(goNextOrEnd, 800);
     }
 
     /*
-        Skip behaviour:
-        Counts as a wrong guess and advances immediately.
-        This prevents players being stuck if they don't know the Pokémon.
+        Skip handler: counts as wrong and advances.
     */
     function handleSkip() {
         wrongGuesses += 1;
-        if (currentPokemonId === shuffledPokemonList.length - 1) {
-            showEndOverlay();
-        } else {
-            currentPokemonId = nextPokemonId(
-                currentPokemonId,
-                shuffledPokemonList.length
-            );
-            runGame();
-        }
+        resultText.textContent = "\u23ED\uFE0F Skipped!";
+        syncStats();
+        setTimeout(goNextOrEnd, 250);
     }
 
     /*
-        Resets the round:
-        Re-shuffles for replay value and resets counters.
-        High score is intentionally retained across restarts.
+        Restarts the game with a reshuffle.
+        High score remains.
     */
     function restartGame() {
         shuffledPokemonList = shuffleArray(pokemonList);
@@ -247,39 +337,30 @@ Score: ${score}`;
     }
 
     /*
-        Keyboard support:
-        Allows Enter to submit guesses for faster play and better accessibility.
+        Keyboard support: Enter submits a guess.
     */
-    function handleKeyPress(event) {
+    function handleKeyDown(event) {
         if (event.key === "Enter") {
+            event.preventDefault();
             handleCheckGuess();
         }
     }
 
-    // Wire up UI controls
     checkGuessButton.addEventListener("click", handleCheckGuess);
     nextPokemonButton.addEventListener("click", handleSkip);
-    guessInput.addEventListener("keypress", handleKeyPress);
+    guessInput.addEventListener("keydown", handleKeyDown);
 
     runGame();
 }
 
-/*
-    Wait for the DOM so elements exist before attempting to cache them.
-*/
 if (typeof document === "object") {
     document.addEventListener("DOMContentLoaded", initializeGame);
 }
 
-/*
-    Export pure functions for automated tests (Node environment).
-*/
 if (typeof module === "object" && module.exports) {
-    module.exports = {
-        isCorrectGuess,
-        nextPokemonId,
-        pokemonList,
-        shuffleArray,
-        updateScore
-    };
+    module.exports.isCorrectGuess = isCorrectGuess;
+    module.exports.nextPokemonId = nextPokemonId;
+    module.exports.pokemonList = pokemonList;
+    module.exports.shuffleArray = shuffleArray;
+    module.exports.updateScore = updateScore;
 }
