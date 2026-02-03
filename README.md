@@ -108,8 +108,29 @@ To provide a lightweight, replayable Pokémon guessing game that delivers immedi
 
 ## Wireframes
 Wireframes were created for desktop, tablet, and mobile screen sizes for both the home page and game page.
+### Index.html desktop: 1366px to 1920px
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/84ec9dce-4721-46a7-bd0b-72d55a561d83" />
+### index.html Tablet 768px to 1280px
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/95ad63b5-2618-46b1-b20c-ba9529a297d2" />
 
-> *(Existing wireframe screenshots remain here and are unchanged.)*
+### index.html phone UX 360px to 414px wide
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/f006b472-e89f-4207-b88c-e4b4b64b3486" />
+
+### pokemongame.html desktop 1366px to 1920px
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/1e274f8d-af46-4ff2-9215-a5fcba8e3d3f" />
+
+### pokemongame tablet 768px to 1280px
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f6c8407d-fe80-4ac9-a316-211e339c7758" />
+
+### pokemongame phone 360px to 414px wide
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/f27a2fe3-81a3-47ae-aef7-a281861912c9" />
+
+
+
+
+
+
+
 
 ---
 
