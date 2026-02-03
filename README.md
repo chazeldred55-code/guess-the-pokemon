@@ -157,18 +157,44 @@ Wireframes were created for desktop, tablet, and mobile screen sizes for both th
 The restrained colour palette was deliberately chosen over a more vibrant theme to avoid distracting from the Pokémon silhouettes, which are the core gameplay element. High-contrast colours were prioritised to ensure feedback messages remain readable across devices and lighting conditions.
 
 ## Features
-- Randomised Pokémon order each playthrough.
-- No duplicate Pokémon within a single game.
-- Case-insensitive guess validation.
-- Empty input validation with user feedback.
-- Skip functionality.
-- Score and wrong-guess tracking.
-- End-of-round results overlay.
-- Keyboard input support.
-- Responsive design using Bootstrap.
-- Custom 404 page redirecting users back to the home page.
+- Randomised Pokémon order on each playthrough
+- No duplicate Pokémon within a single game session
+- Case-insensitive guess validation
+- Empty input handling with clear user feedback
+- Skip functionality to progress without guessing
+- Score tracking and incorrect guess logging
+- End-of-round results overlay
+- Keyboard input support (Enter key)
+- Responsive design using Bootstrap
+- Custom 404 page redirecting users back to the home page
 
----
+### Game Logic Implementation
+The game logic is implemented using vanilla JavaScript and runs entirely client-side.
+A local Pokémon data structure stores silhouette image paths alongside their expected
+answers, allowing the application to function as a static site without external APIs.
+
+At the start of each game, the Pokémon list is randomised to ensure a unique order
+on every playthrough, while logic is applied to prevent duplicate Pokémon from
+appearing within a single session.
+
+### Input Validation and User Feedback
+User input is trimmed and normalised to lowercase before validation to ensure
+case-insensitive comparisons. Empty submissions are detected and blocked, with
+clear feedback provided to guide the user before progressing.
+
+Both mouse and keyboard input are supported, allowing guesses to be submitted
+using the Enter key for improved usability.
+
+### Game Flow and State Management
+The game tracks the player’s score, incorrect guesses, and current round internally.
+Each round concludes with a results overlay that displays the outcome before allowing
+the player to continue. After the final round, the game presents an overall result
+summary to clearly indicate completion.
+
+### Responsiveness and Accessibility
+Bootstrap is used to create a responsive layout that adapts across desktop, tablet,
+and mobile devices. Interactive elements are keyboard-accessible, and feedback
+messages use clear visual contrast to support accessibility best practices.
 
 ## Technologies Used
 - **HTML5** – page structure.
