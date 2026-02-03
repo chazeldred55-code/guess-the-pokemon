@@ -1,21 +1,22 @@
 # Guess the Pokémon 🕵️‍♂️⚡
 
 ## Table of Contents
-1. [Introduction](#introduction)  
-2. [Purpose and Value](#purpose-and-value)  
-3. [Target Audience](#target-audience)  
-4. [User Stories](#user-stories)  
-5. [Requirements Mapping](#requirements-mapping)  
-6. [Wireframes](#wireframes)  
-7. [UX Design Rationale](#ux-design-rationale)  
-8. [Features](#features)  
-9. [Technologies Used](#technologies-used)  
-10. [Manual Testing](#manual-testing)  
-11. [Automated Testing](#automated-testing)  
-12. [Usability Testing (Lighthouse)](#usability-testing-lighthouse)  
-13. [Bugs and Fixes Log](#bugs-and-fixes-log)  
-14. [Deployment](#deployment)  
-15. [Testing Principles](#testing-principles)
+1. [Introduction](#introduction)
+2. [Value to Users](#Value-to-users)
+3. [Purpose and Value](#purpose-and-value)  
+4. [Target Audience](#target-audience)  
+5. [User Stories](#user-stories)  
+6. [Requirements Mapping](#requirements-mapping)  
+7. [Wireframes](#wireframes)  
+8. [UX Design Rationale](#ux-design-rationale)  
+9. [Features](#features)  
+10. [Technologies Used](#technologies-used)  
+11. [Manual Testing](#manual-testing)  
+12. [Automated Testing](#automated-testing)  
+13. [Usability Testing (Lighthouse)](#usability-testing-lighthouse)  
+14. [Bugs and Fixes Log](#bugs-and-fixes-log)  
+15. [Deployment](#deployment)  
+16. [Testing Principles](#testing-principles)
 
 ---
 
@@ -33,7 +34,17 @@ This web application is a **Pokémon guessing game** designed to test a user’s
 - After **20 rounds**, the final score is displayed and the game can be restarted.
 
 ---
+## Value to Users
 
+Provides a quick, casual Pokémon knowledge challenge (entertainment value).
+
+Encourages repeat play with shuffled order and a high score to beat.
+
+Instant feedback (“Correct/Wrong”) makes the game feel responsive and rewarding.
+
+Low-friction: no login, no setup, works in browser on desktop and mobile.
+
+Accessible interaction: simple controls + Enter-to-submit.
 ## Purpose and Value
 **Purpose:**  
 To provide a lightweight, replayable Pokémon guessing game that delivers immediate feedback and a clear sense of progression across a fixed number of rounds.
