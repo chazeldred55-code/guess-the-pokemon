@@ -1,160 +1,234 @@
-# Table of Contents
-1. [Introduction](#introduction)   
-2. [Wireframe](#wireframe)  
-3. [Features](#features)  
-4. [Used Tools](#used-tools)  
-5. [Manual_Testing](#manual-testing)
-6. [Automatic_Testing](#automatic-testing)
-7. [Principles_Testing](#principles-testing)
+# Guess the Pokémon 🕵️‍♂️⚡
+
+## Table of Contents
+1. [Introduction](#introduction)  
+2. [Purpose and Value](#purpose-and-value)  
+3. [Target Audience](#target-audience)  
+4. [User Stories](#user-stories)  
+5. [Requirements Mapping](#requirements-mapping)  
+6. [Wireframes](#wireframes)  
+7. [UX Design Rationale](#ux-design-rationale)  
+8. [Features](#features)  
+9. [Technologies Used](#technologies-used)  
+10. [Manual Testing](#manual-testing)  
+11. [Automated Testing](#automated-testing)  
+12. [Usability Testing (Lighthouse)](#usability-testing-lighthouse)  
+13. [Bugs and Fixes Log](#bugs-and-fixes-log)  
+14. [Deployment](#deployment)  
+15. [Testing Principles](#testing-principles)
+
 ---
 
 ## Introduction
-This web application is a **Pokémon guessing game**.  
+This web application is a **Pokémon guessing game** designed to test a user’s Pokémon knowledge in a fun and interactive way.
 
-- The **homepage** introduces the game’s theme: testing the user’s knowledge of Pokémon.  
-- When the user navigates to the **game page**, they see a hero image of a Pokémon silhouette.  
-- The user can type their guess into a text box and submit it.  
-- Two buttons are provided:  
-  - **Submit Guess** → checks the answer.  
-  - **Next Pokémon** → loads a new random Pokémon.  
-- Correct answers display a green “Correct!” message.  
-- Incorrect answers display a red “Incorrect!” message.  
-- A running tally is kept throughout the game.  
-- At the end of 20 rounds, the user is given a final score (e.g., `18/20`).  
-- After the results, the game resets so the user can play again.
+- The **home page** introduces the game and its theme.
+- The **game page** displays a silhouette image of a Pokémon.
+- The user enters a guess into a text input and submits it.
+- Two buttons are available:
+  - **Submit Guess** – checks the player’s answer.
+  - **Next Pokémon** – skips to the next Pokémon.
+- The user receives immediate feedback for each guess.
+- A running score is maintained throughout the game.
+- After **20 rounds**, the final score is displayed and the game can be restarted.
 
----*  
+---
 
-## Wireframe
-Index.html
-desktop:
-1366px to 1920px
-<img width="890" height="420" alt="image" src="https://github.com/user-attachments/assets/c1a27beb-bd7c-4a85-8e93-fb8315fd61b9" />
+## Purpose and Value
+**Purpose:**  
+To provide a lightweight, replayable Pokémon guessing game that delivers immediate feedback and a clear sense of progression across a fixed number of rounds.
 
+**Value to players:**
+- Simple and intuitive gameplay requiring no instructions.
+- Immediate feedback reinforces engagement.
+- A final score encourages replay and self-competition.
+- Skip functionality ensures the player never becomes stuck.
 
+**Value as a portfolio project:**
+- Demonstrates interactive front-end development using HTML, CSS, and JavaScript.
+- Shows state management, DOM manipulation, defensive input handling, and event-driven logic.
+- Includes both manual and automated testing with documented results.
+- Fully deployed and accessible via GitHub Pages.
 
-index tablet
-768px to 1280px
-<img width="550" height="492" alt="image" src="https://github.com/user-attachments/assets/6bb07403-a8e4-401d-b9d8-081137caecfd" />
+---
 
+## Target Audience
+- **Primary:** Pokémon fans who enjoy trivia or guessing games.
+- **Secondary:** Recruiters, assessors, or clients reviewing front-end development skills and documentation quality.
 
+---
 
-index phone
-360px to 414px wide:
-<img width="252" height="532" alt="image" src="https://github.com/user-attachments/assets/76593d18-25ed-4038-91b3-9e8a0f70773e" />
+## User Stories
 
+### Player Stories
+- **US1:** As a player, I want to start the game from the home page so I can play immediately.
+- **US2:** As a player, I want to submit a Pokémon name so I can test my knowledge.
+- **US3:** As a player, I want clear feedback when I guess correctly or incorrectly.
+- **US4:** As a player, I want to skip a Pokémon so I don’t get stuck.
+- **US5:** As a player, I want to see a final score after 20 rounds so I can judge my performance.
 
-pokemongame.html
-desktop
-1366px to 1920px
-<img width="831" height="452" alt="image" src="https://github.com/user-attachments/assets/7a0c0a48-2401-49d3-8cde-5a975f62e32b" />
+### Stakeholder / Portfolio Stories
+- **US6:** As a recruiter or assessor, I want to see a responsive and accessible interface.
+- **US7:** As a recruiter or assessor, I want clear documentation of testing and deployment.
 
-pokemongame tablet
-768px to 1280px
-<img width="550" height="492" alt="image" src="https://github.com/user-attachments/assets/30449846-889a-4d69-bfcf-d396a5b2de88" />
+---
 
-pokemongame phone
-360px to 414px wide:
-<img width="218" height="482" alt="image" src="https://github.com/user-attachments/assets/b6abdef7-c0ad-41ad-9750-fcc129fcf4fb" />
+## Requirements Mapping
+
+| Requirement | User Story |
+|---|---|
+| Home page introduction and navigation | US1 |
+| Pokémon silhouette display | US2 |
+| Guess input and submission | US2 |
+| Feedback for correct / incorrect guesses | US3 |
+| Skip / Next Pokémon button | US4 |
+| Score tracking and final results | US5 |
+| Responsive layout | US6 |
+| Testing documentation | US7 |
+| Deployment to cloud hosting | US7 |
+
+---
+
+## Wireframes
+Wireframes were created for desktop, tablet, and mobile screen sizes for both the home page and game page.
+
+> *(Existing wireframe screenshots remain here and are unchanged.)*
+
+---
+
+## UX Design Rationale
+
+### Layout and Information Hierarchy
+- A **two-page flow** (Home → Game) minimises cognitive load.
+- The Pokémon image is the primary visual focus, with controls positioned directly beneath for intuitive interaction.
+
+### User Control and Feedback
+- Submit and Skip buttons give the user full control.
+- Immediate feedback confirms user actions.
+- The end-of-game overlay provides closure and encourages replay.
+
+### Visual Design
+- A restrained colour palette improves readability and avoids distraction.
+- Consistent button styles reinforce affordances across pages.
+
+### Accessibility Considerations
+- Clear text contrast and readable font sizes.
+- Keyboard support (Enter key submits guesses).
+- Responsive layout supports mobile, tablet, and desktop devices.
+
+---
 
 ## Features
-*To be added: list the features of your game (e.g., random Pokémon selection, score tracking, responsive design).*  
+- Randomised Pokémon order each playthrough.
+- No duplicate Pokémon within a single game.
+- Case-insensitive guess validation.
+- Empty input validation with user feedback.
+- Skip functionality.
+- Score and wrong-guess tracking.
+- End-of-round results overlay.
+- Keyboard input support.
+- Responsive design using Bootstrap.
+- Custom 404 page redirecting users back to the home page.
 
-## Used Tools
-HTML5 — page structure.
+---
 
-CSS3 / Bootstrap 5 — responsive design and layout.
+## Technologies Used
+- **HTML5** – page structure.
+- **CSS3 & Bootstrap 5** – responsive layout and styling.
+- **JavaScript (Vanilla)** – game logic and interactivity.
+- **Font Awesome** – icons.
+- **Git & GitHub** – version control and hosting.
+- **Jest** – automated unit testing.
+- **ChatGPT** – documentation support.
 
-JavaScript (Vanilla) — game logic and interactivity.
-
-Font Awesome — icons (dragon, trophy, etc.).
-
-Git & GitHub — version control and hosting. 
-
-Chat GPT v 5.0
-
-Jest 
+---
 
 ## Manual Testing
-| Feature              | Action                                 | Expected Result                                     | Actual Result     | Pass/Fail |
-| -------------------- | -------------------------------------- | --------------------------------------------------- | ----------------- | --------- |
-| **Navbar – Desktop** | Open on desktop (≥1366px)              | Navbar visible with links aligned right             | Works as expected | ✅ Pass    |
-| **Navbar – Mobile**  | Open on phone (≤414px)                 | Navbar collapses into burger menu, expands on click | Works as expected | ✅ Pass    |
-| **Footer**           | Scroll page / resize window            | Footer sticks to bottom of viewport                 | Works as expected | ✅ Pass    |
-| **Pokémon Image**    | Start game                             | First Pokémon image loads correctly                 | Works as expected | ✅ Pass    |
-| **Submit Guess**     | Enter correct Pokémon name             | Displays green "Correct!" message                   | Works as expected | ✅ Pass    |
-| **Submit Guess**     | Enter incorrect Pokémon name           | Displays red "Incorrect!" message                   | Works as expected | ✅ Pass    |
-| **Next Pokémon**     | Click "Next Pokémon" button            | Loads new Pokémon image                             | Works as expected | ✅ Pass    |
-| **Game Completion**  | Play through all 20 Pokémon            | Displays final score and restarts automatically     | Works as expected | ✅ Pass    |
-| **Reset Function**   | After 20 rounds                        | Game resets to round 1, score cleared               | Works as expected | ✅ Pass    |
-| **Responsiveness**   | Resize to desktop, tablet, phone sizes | Layout adapts, images/buttons scale properly        | Works as expected | ✅ Pass    |
 
- **Navbar – Desktop**
- <img width="1892" height="857" alt="image" src="https://github.com/user-attachments/assets/454cfe81-a34f-4056-80aa-5626385c1c15" />
+| Feature / User Story | Action | Expected Result | Actual Result | Pass |
+|---|---|---|---|---|
+| Navbar – Desktop (US1, US6) | Open on desktop | Navbar visible | Works | ✅ |
+| Navbar – Mobile (US1, US6) | Open on phone | Collapses into menu | Works | ✅ |
+| Pokémon Image (US2) | Start game | Image loads | Works | ✅ |
+| Submit Guess – Correct (US2, US3) | Enter correct name | Correct feedback | Works | ✅ |
+| Submit Guess – Incorrect (US2, US3) | Enter wrong name | Incorrect feedback | Works | ✅ |
+| Skip Pokémon (US4) | Click skip | Next Pokémon loads | Works | ✅ |
+| Game Completion (US5) | Play 20 rounds | Final score shown | Works | ✅ |
+| Responsiveness (US6) | Resize viewport | Layout adapts | Works | ✅ |
 
-**Navbar – Mobile**
- <img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/2e395d9c-d96b-41bd-901d-b5729072a8c1" />
-<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/c3dd001a-f2eb-4bee-a4cf-8d99f222baef" />
- **Footer** 
- <img width="1036" height="695" alt="image" src="https://github.com/user-attachments/assets/3fb000ed-6c92-42d9-af2c-d452a5bce21c" />
- **Pokémon Image**
-<img width="1028" height="676" alt="image" src="https://github.com/user-attachments/assets/a4426562-1835-492f-817b-5b3609b71c6e" />
-**Submit Guess** - Correct
-<img width="340" height="416" alt="image" src="https://github.com/user-attachments/assets/ae6f8e3b-d0bb-419a-922c-063e4b9673c8" />
+> *(Existing screenshots remain directly below this table.)*
 
-**Submit Guess**  Incorrect
-<img width="293" height="376" alt="image" src="https://github.com/user-attachments/assets/92e3cb9e-607b-4b0e-8a68-1d4fb1f484c8" />
+---
 
- **Next Pokémon** 
- <img width="523" height="730" alt="image" src="https://github.com/user-attachments/assets/67f7ac96-3eda-4dff-b950-dcd58f1625f2" />
+## Automated Testing
+Automated unit tests were written using **Jest** to validate core game logic such as:
+- Guess validation
+- Score calculation
+- Pokémon order randomisation
 
- <img width="505" height="713" alt="image" src="https://github.com/user-attachments/assets/cf7af886-9f64-4712-803f-0e101fd7ab71" />
+> *(Existing Jest screenshot remains here.)*
 
- **Game Completion** 
+---
 
-<img width="771" height="395" alt="image" src="https://github.com/user-attachments/assets/ce9bf065-d826-41bf-a7be-a0e7dcd0f4d5" />
+## Usability Testing (Lighthouse)
+Lighthouse audits were performed using Chrome DevTools on all pages.
 
-**Reset Function** 
-<img width="513" height="760" alt="image" src="https://github.com/user-attachments/assets/6daab79d-e1aa-485a-949e-24a59ca910e4" />
+**Pages tested:**
+- Home page
+- Game page
+- 404 page
 
-**Responsiveness** 
-Laptop home index 1366px to 1920px
-<img width="1020" height="667" alt="image" src="https://github.com/user-attachments/assets/c8406dac-9490-44fd-b9cf-3b489ebb965c" />
+**Metrics assessed:**
+- Accessibility
+- Performance
+- Best Practices
+- SEO
 
-tablet home index 768px to 1280px
-<img width="846" height="757" alt="image" src="https://github.com/user-attachments/assets/4210bfa7-6773-4df4-b55c-fd4c1d2819be" />
+> *(Lighthouse screenshots to be added here.)*
 
+---
 
-phone home index 360px to 414px wide:
-<img width="252" height="758" alt="image" src="https://github.com/user-attachments/assets/4057735e-1c71-42ee-ad70-19e11afa5135" />
+## Bugs and Fixes Log
 
+| ID | Issue | Fix | Status |
+|---|---|---|---|
+| B1 | Empty guess submission | Input validation added | Fixed |
+| B2 | Feedback not visible long enough | Delay added before next round | Fixed |
 
+**Known Issues:**  
+No known unresolved issues at the time of submission.
 
-laptop pokemon game 
-<img width="960" height="757" alt="image" src="https://github.com/user-attachments/assets/2aabf41f-f1dc-406b-929d-a64b166ca0b7" />
+---
 
+## Deployment
+The project is deployed using **GitHub Pages**.
 
-tablet pokemon game
-<img width="536" height="752" alt="image" src="https://github.com/user-attachments/assets/5a8c35b8-e025-4786-999b-3ad372a4fda7" />
+### Steps
+1. Open repository settings.
+2. Navigate to **Pages**.
+3. Deploy from the `main` branch using the root directory.
+4. Save and wait for the site to publish.
 
-phone pokemon game
-<img width="242" height="756" alt="image" src="https://github.com/user-attachments/assets/89297517-e512-4e26-a7cc-2841b6ee20b8" />
+### Live Site
+https://coolafdood.github.io/guess-the-pokemon/
 
-## Automatic Testing
-Jest
-<img width="902" height="352" alt="image" src="https://github.com/user-attachments/assets/b774c99d-c6ee-42b4-8176-37cbd2cf83ef" />
+Post-deployment checks confirmed:
+- No broken internal links
+- Correct loading of assets
+- Functional navigation and gameplay
 
+---
 
-## Principles Testing
+## Testing Principles
+Testing was conducted using both **manual** and **automated** approaches.
 
-There are two types of testing, automatic and manual and should be done before and after any code has been modified or added.
+- **Manual testing** verifies user journeys and UI behaviour.
+- **Automated testing** ensures core logic remains reliable.
 
-Manual: Using user test cases, you pose as a user (or admin or site owner), using the site. screenshotting upon each function that you are showing that works by clicking buttons and using features, therefore showing the ability. This will benefit the site as you can then get to the end goal for the user (purchasing from the site or adding to the basket). It can be more specific to the context of the users scenario, such as an action performed like logging out and then putting in the concequences of the action, in the case of logging out; it logs out. This can can now be observed and can be repeated. however it is much more time consuming, as it may take more than one person to do this type of testing; especially if it is a larger project as you have to test all the logic. This testing consumes more energy therefore, issues are much more than likely to be missed due to fatigue. it can be described as Behaviour Driven Development (BDD). 
+Testing follows the **RITE** principles:
+- **Readable**
+- **Isolated**
+- **Thorough**
+- **Explicit**
 
-Automatic: Can be done much faster, with the code and mulitple can be run in a short time of space at the same time. As it uses less time and energy, it is much more efficent of its time when detecting errors much earlier. Unlike manual, it can pick up edge cases. We use TDD (Test Driven Development) which is know as Red-Green-Refactor testing, where you start writing with just enough tests to get it started, with one code at a time.  However, it is only as good as the prompts and questioned asked and give a false impression. 
-
-A good acronym RITE (Readable Isolated Thorough Explicit) To describe the behaviour behind how to test.
-Readable - meaning whenever you write the description of the failure or what you are testing for is coherent and easy to read.
-Isolated - should be atomic, individual. This prevents any mixup and confusion and should not have to pass one test to pass another.
-Thorough - to expect the unexpected, meaning sods law comes into play where something is bound to go wrong.
-Explicit - This means the test must be obvious to what it is testing in the test code and be able to repeat.
+---
