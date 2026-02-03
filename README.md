@@ -156,9 +156,57 @@ Wireframes were created for desktop, tablet, and mobile screen sizes for both th
 | Game Completion (US5) | Play 20 rounds | Final score shown | Works | ✅ |
 | Responsiveness (US6) | Resize viewport | Layout adapts | Works | ✅ |
 
-> *(Existing screenshots remain directly below this table.)*
+### Navbar - Desktop 
+<img width="1892" height="857" alt="image" src="https://github.com/user-attachments/assets/0f4b191f-c8a6-40c1-a179-5237d807f09f" />
 
----
+### Navbar - Mobile 
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/a9fd8835-3b52-470d-ab49-04f9c58094ad" />
+### Opening Burger menu for mobile
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/ee37d854-1cf0-448c-9c5b-3cde019a6bba" />
+
+### Desktop Footer
+<img width="1036" height="695" alt="image" src="https://github.com/user-attachments/assets/faad4b3a-57f0-4efc-b5cf-a107d09bf68c" />
+
+### Pokemon Images Load
+<img width="1028" height="676" alt="image" src="https://github.com/user-attachments/assets/99b13882-0dac-46b8-aa65-b26fb953f5f9" />
+
+### Pokemon Guess Correct
+<img width="340" height="416" alt="image" src="https://github.com/user-attachments/assets/029e4dbe-8a5a-441b-9657-f6540ef5972f" />
+
+### Pokemon Guess Incorrect
+<img width="293" height="376" alt="image" src="https://github.com/user-attachments/assets/68e7220b-da40-4c61-a57e-380468b03bc0" />
+
+### Next Pokemon Image
+<img width="523" height="730" alt="image" src="https://github.com/user-attachments/assets/cf2bea41-0a58-460b-a7a8-c05840f0008c" />
+
+### Game Completion with Results
+<img width="771" height="395" alt="image" src="https://github.com/user-attachments/assets/c54f5ed6-0a8c-4c95-a342-842428eece6b" />
+
+### Replay Function, Try again!
+<img width="513" height="760" alt="image" src="https://github.com/user-attachments/assets/b606b067-ac2e-4246-91d1-eab14d4a2d95" />
+
+### Responsiveness Laptop home index 1366px to 1920px
+<img width="1020" height="667" alt="image" src="https://github.com/user-attachments/assets/9fac4beb-fb8b-43e1-909e-a728480def3e" />
+
+### tablet home index 768px to 1280px 
+<img width="846" height="757" alt="image" src="https://github.com/user-attachments/assets/6bdef580-e9d0-4481-9164-6cd8b1569f87" />
+
+### phone home index 360px to 414px wide: 
+<img width="252" height="758" alt="image" src="https://github.com/user-attachments/assets/37c293a1-f567-479f-bf0a-64791269bc1e" />
+
+### laptop pokemon game 720px to 1280px
+<img width="960" height="757" alt="image" src="https://github.com/user-attachments/assets/e4efc166-8e3a-4513-b5ae-82496cede5ef" />
+
+
+### tablet UX pokemon game 
+<img width="536" height="752" alt="image" src="https://github.com/user-attachments/assets/d503eb2d-b780-4b94-9fb0-43fd9edde12e" />
+
+
+### Phone UX pokemon game
+<img width="536" height="752" alt="image" src="https://github.com/user-attachments/assets/63a6b02c-380b-4d20-b6d6-a8ce9545f43c" />
+
+
+
 
 ## Automated Testing
 Automated unit tests were written using **Jest** to validate core game logic such as:
@@ -166,7 +214,7 @@ Automated unit tests were written using **Jest** to validate core game logic suc
 - Score calculation
 - Pokémon order randomisation
 
-> *(Existing Jest screenshot remains here.)*
+<img width="902" height="352" alt="image" src="https://github.com/user-attachments/assets/cead64f2-d8e0-4ff3-ab62-06bfb2a0bda9" />
 
 ---
 
