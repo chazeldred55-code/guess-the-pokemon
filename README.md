@@ -127,6 +127,40 @@ Wireframes were created for desktop, tablet, and mobile screen sizes for both th
 
 
 
+## Design Process
+
+### Wireframes
+
+The initial wireframe was created to define the layout and structure of the application before applying any visual styling.
+A simple vertical layout was chosen to guide the user through the core interaction: viewing the Pokémon, entering a guess, and receiving feedback.
+
+![Home Wireframe](./docs/wireframes/home-wireframe.png)
+
+---
+
+### Final UI Design
+
+The final interface builds upon the wireframe by introducing colour, spacing, and improved visual hierarchy.
+A minimal design approach was used to keep the interface clear and focused on the main gameplay interaction.
+
+![Home Final UI](./docs/screenshots/home-final.png)
+
+---
+
+### Design Decisions
+
+* A centered vertical layout ensures a clear and intuitive user flow
+* Consistent spacing (16px–24px) improves readability and structure
+* A limited colour palette keeps the interface simple and focused
+* The blue call-to-action button highlights the primary interaction (submitting a guess)
+* Feedback text is placed directly below the button to provide immediate user response
+
+---
+
+### Wireframe vs Final
+
+The wireframe defined the structure and placement of elements, while the final design refined the interface with improved spacing, alignment, and visual emphasis.
+This demonstrates how initial planning informed the final implementation.
 
 
 
