@@ -248,17 +248,17 @@ The application uses a restrained colour palette to maintain clarity and focus o
 
 | Colour | Hex | Usage |
 |--------|-----|------|
-| Primary Blue | #0d6efd | Buttons and key actions |
+| Primary Blue | #0d6efd | Buttons and primary actions |
 | Background Light | #f8f9fa | Page background |
-| Text Dark | #212529 | Primary text |
-| Feedback Green | #198754 | Correct guesses |
-| Feedback Red | #dc3545 | Incorrect guesses |
+| Text Dark | #212529 | Main text |
+| Success Green | #198754 | Correct feedback |
+| Error Red | #dc3545 | Incorrect feedback |
 
 ### Rationale
-- Blue is used for primary actions to guide user attention  
-- High contrast between text and background improves readability  
-- Green and red provide clear, immediate feedback  
-- A limited palette reduces cognitive load and keeps focus on the Pokémon silhouette
+- Blue is used to highlight primary actions, guiding user attention to submitting guesses  
+- Green and red provide immediate, clear feedback on user input  
+- High contrast between text and background improves readability and accessibility across devices  
+- A restrained palette avoids distracting from the Pokémon silhouette, which is the core gameplay element  
 
 ## Typography
 
