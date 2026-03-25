@@ -8,16 +8,18 @@
 5. [User Stories](#user-stories)  
 6. [Requirements Mapping](#requirements-mapping)  
 7. [Wireframes](#wireframes)  
-8. [UX Design Rationale](#ux-design-rationale)  
-9. [Features](#features)  
-10. [Technologies Used](#technologies-used)  
-11. [Manual Testing](#manual-testing)  
-12. [Automated Testing](#automated-testing)  
-13. [Usability Testing (Lighthouse)](#usability-testing-lighthouse)  
-14. [Bugs and Fixes Log](#bugs-and-fixes-log)  
-15. [Deployment](#deployment)  
-16. [Testing Principles](#testing-principles)
-17. [Future_Enhancements](#future-enhancements)
+8. [UX Design Rationale](#ux-design-rationale)
+9. [Typography](#typography)
+10. [Colour_Scheme](#colour-scheme) 
+11. [Features](#features)  
+12. [Technologies Used](#technologies-used)  
+13. [Manual Testing](#manual-testing)  
+14. [Automated Testing](#automated-testing)  
+15. [Usability Testing (Lighthouse)](#usability-testing-lighthouse)  
+16. [Bugs and Fixes Log](#bugs-and-fixes-log)  
+17. [Deployment](#deployment)  
+18. [Testing Principles](#testing-principles)
+19. [Future_Enhancements](#future-enhancements)
 
 ---
 
@@ -239,6 +241,60 @@ summary to clearly indicate completion.
 Bootstrap is used to create a responsive layout that adapts across desktop, tablet,
 and mobile devices. Interactive elements are keyboard-accessible, and feedback
 messages use clear visual contrast to support accessibility best practices.
+
+## Colour Scheme
+
+The application uses a restrained colour palette to maintain clarity and focus on gameplay.
+
+| Colour | Hex | Usage |
+|--------|-----|------|
+| Primary Blue | #0d6efd | Buttons and key actions |
+| Background Light | #f8f9fa | Page background |
+| Text Dark | #212529 | Primary text |
+| Feedback Green | #198754 | Correct guesses |
+| Feedback Red | #dc3545 | Incorrect guesses |
+
+### Rationale
+- Blue is used for primary actions to guide user attention  
+- High contrast between text and background improves readability  
+- Green and red provide clear, immediate feedback  
+- A limited palette reduces cognitive load and keeps focus on the Pokémon silhouette
+
+## Typography
+
+A clean sans-serif font is used throughout the application to maximise readability.
+
+### Font Choices
+- Primary font: System default / Bootstrap font stack  
+- Fallback: Arial, sans-serif  
+
+### Hierarchy
+- Headings: Larger and bold to establish structure  
+- Body text: Standard size for readability  
+- Feedback text: Slightly emphasised for visibility  
+
+### Rationale
+- Sans-serif fonts improve legibility on screens  
+- Clear hierarchy helps users quickly scan and interact  
+- Consistent typography supports usability and accessibility
+
+  ## Typography
+
+A clean sans-serif font is used throughout the application to maximise readability.
+
+### Font Choices
+- Primary font: System default / Bootstrap font stack  
+- Fallback: Arial, sans-serif  
+
+### Hierarchy
+- Headings: Larger and bold to establish structure  
+- Body text: Standard size for readability  
+- Feedback text: Slightly emphasised for visibility  
+
+### Rationale
+- Sans-serif fonts improve legibility on screens  
+- Clear hierarchy helps users quickly scan and interact  
+- Consistent typography supports usability and accessibility  
 
 ## Technologies Used
 - **HTML5** – page structure.
