@@ -136,7 +136,7 @@ Wireframes were created for desktop, tablet, and mobile screen sizes for both th
 The initial wireframe was created to define the layout and structure of the application before applying any visual styling.
 A centered vertical layout was chosen to guide the user’s attention through the core interaction flow: image → input → submission → feedback.
 
-![Home Wireframe](docs/wireframes/home-wireframe.png)
+![Home Wireframe](docs/wireframes/home-wireframe.png.png)
 
 ---
 ## Description
@@ -155,7 +155,7 @@ A simple web-based game where users guess a Pokémon based on its silhouette. Th
 The final interface builds upon the wireframe by introducing colour, spacing, and improved visual hierarchy.
 A minimal design approach was used to keep the interface clear and focused on the main gameplay interaction.
 
-![Home Final UI](docs/screenshots/home-final.png)
+![Home Final UI](docs/screenshots/home-final.png.png)
 
 ---
 
